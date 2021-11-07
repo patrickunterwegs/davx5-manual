@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Managed DAVx⁵ &mdash; DAVx⁵ DRAFT documentation</title><link rel="stylesheet" href="_static/css/davx5.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="canonical" href="https://www.davx5.com/manual/managed_davx5.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Integration / API" href="integration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DAVx⁵
+          </a>
+              <div class="version">
+                DRAFT
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accounts_collections.html">Accounts and Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdav_mounts.html">WebDAV Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_information.html">Technical information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration / API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Managed DAVx⁵</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#managed-configuration">Managed configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-by-android-enterprise">Configuration by Android Enterprise</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-configuration">Network configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#certificates">Certificates</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caching">Caching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-by-fixed-url">Configuration by fixed URL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-by-unicast-dns">Configuration by unicast DNS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-by-zeroconf-dns-sd">Configuration by Zeroconf (DNS-SD)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-variables">Configuration variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-file-syntax">Configuration file syntax</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DAVx⁵</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Managed DAVx⁵</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bitfireAT/davx5-manual/blob/main/managed_davx5.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="managed-davx5">
+<h1>Managed DAVx⁵<a class="headerlink" href="#managed-davx5" title="Permalink to this headline">¶</a></h1>
+<p>Managed DAVx⁵ is a version of DAVx⁵ that contains mass-deployment and configuration features
+for organizations.</p>
+<div class="section" id="managed-configuration">
+<h2>Managed configuration<a class="headerlink" href="#managed-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Managed DAVx⁵ allows you to manage DAVx⁵ clients centrally by using these configuration methods (in order of precedence):</p>
+<ul class="simple">
+<li><p>Android Enterprise (recommended)</p></li>
+<li><p>network configuration: fixed URL (QR code)</p></li>
+<li><p>network configuration: unicast DNS</p></li>
+<li><p>network configuration: Zeroconf (DNS-SD)</p></li>
+</ul>
+<p>This configuration is used in the Managed DAVx⁵ UI and for new Managed DAVx⁵ accounts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Existing Managed DAVx⁵ accounts on your devices won’t be modified when the managed configuration is changed.</p>
+</div>
+</div>
+<div class="section" id="configuration-by-android-enterprise">
+<h2>Configuration by Android Enterprise<a class="headerlink" href="#configuration-by-android-enterprise" title="Permalink to this headline">¶</a></h2>
+<p>Android Enterprise is the recommended method to configure Managed DAVx⁵. With Android Enterprise, IT departments can deploy apps to
+<strong>managed devices</strong> and configure them in a standardized way using MDM software. Apps are configured by <strong>managed configurations</strong>
+(sometimes called restrictions) which can be set in the MDM software for every deployed app.</p>
+<div class="figure align-default" id="id1">
+<a class="reference external image-reference" href="_images/android_enterprise_configuration.png"><img alt="Screenshot of Managed DAVx⁵ configuration over an MDM" src="_images/android_enterprise_configuration.png" /></a>
+<p class="caption"><span class="caption-text">You can configure Managed DAVx⁵ using MDM/EMM software.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="network-configuration">
+<h2>Network configuration<a class="headerlink" href="#network-configuration" title="Permalink to this headline">¶</a></h2>
+<p>If Android Enterprise is not an option for you, you can choose between three network configuration methods:</p>
+<ul class="simple">
+<li><p>fixed URL (entered directly or via QR code)</p></li>
+<li><p>unicast DNS</p></li>
+<li><p>Zeroconf (DNS-SD)</p></li>
+</ul>
+<p>Network configuration requires your Android devices to be connected to the network where the configuration file can be found.</p>
+<div class="section" id="certificates">
+<h3>Certificates<a class="headerlink" href="#certificates" title="Permalink to this headline">¶</a></h3>
+<p>When accessing the configuration file, PKI is used to verify the TLS certificate, so a self-signed certificate won’t work without adding it to the Android device first. We recommend to put the configuration file to a location which is accessible over a trusted certificate. You can then define custom trusted certificates in the configuration file.</p>
+</div>
+<div class="section" id="caching">
+<h3>Caching<a class="headerlink" href="#caching" title="Permalink to this headline">¶</a></h3>
+<p>Two types of caching are used to cache Managed DAVx⁵ configuration when it’s taken from the network:</p>
+<ol class="arabic simple">
+<li><p>configuration cache and</p></li>
+<li><p>HTTP cache.</p></li>
+</ol>
+<dl class="simple">
+<dt>Configuration cache:</dt><dd><p>Managed DAVx⁵ caches the configuration file which is fetched from the network so that Managed DAVx⁵ configuration is available when there is no network access (and for the time when Managed DAVx⁵ has been started, but the new network configuration is not ready yet). The cache will be overwritten when a new configuration file is downloaded. To reset the cache without a new configuration file, use: Managed DAVx⁵ / About/License / Managed configuration / Reload configuration.</p>
+</dd>
+<dt>HTTP cache:</dt><dd><p>The configuration file is cached when it has been downloaded from the network according to the rules of the HTTP protocol. For instance, if the Web server which hosts the configuration file returns a freshness period of one hour, Managed DAVx⁵ will always use the cached version for one hour. However, the configuration file will be downloaded at least once a day (<code class="docutils literal notranslate"><span class="pre">max-age:</span> <span class="pre">1</span> <span class="pre">day</span></code>) to avoid problems caused by obsolete configuration files. If there is no <code class="docutils literal notranslate"><span class="pre">Expires</span></code>, the cache will use <code class="docutils literal notranslate"><span class="pre">If-Match</span></code> and <code class="docutils literal notranslate"><span class="pre">If-Unmodified-Since</span></code>.</p>
+</dd>
+</dl>
+<p>It’s advisable to set an expiration time for the configuration file on the Web server (for instance, one hour) explicitly to avoid unnecessary network traffic every time Managed DAVx⁵ is started on a device.</p>
+</div>
+<div class="section" id="configuration-by-fixed-url">
+<h3>Configuration by fixed URL<a class="headerlink" href="#configuration-by-fixed-url" title="Permalink to this headline">¶</a></h3>
+<p>The simplest method to configure Managed DAVx⁵ over the network is to use a fixed configuration file URL, which can for example be provided as a QR code. This method can be used if you don’t want to use automatic discovery of the Managed DAVx⁵ configuration file:</p>
+<ol class="arabic simple">
+<li><p><strong>Upload the Managed DAVx⁵ configuration file to a HTTPS server</strong> in the network (file name: <code class="docutils literal notranslate"><span class="pre">davdroid-config.json</span></code>)</p></li>
+<li><p>Managed DAVx⁵ / Managed configuration / Scan the QR code of the configuration file URL or enter the URL.</p></li>
+</ol>
+</div>
+<div class="section" id="configuration-by-unicast-dns">
+<h3>Configuration by unicast DNS<a class="headerlink" href="#configuration-by-unicast-dns" title="Permalink to this headline">¶</a></h3>
+<p>Managed DAVx⁵ tries to resolve the <code class="docutils literal notranslate"><span class="pre">SRV</span></code> and <code class="docutils literal notranslate"><span class="pre">TXT</span></code> path records of <code class="docutils literal notranslate"><span class="pre">davdroid-configs.local</span></code> in the local network. In case of success, the resulting URL (<code class="docutils literal notranslate"><span class="pre">https</span></code> scheme, domain and host taken from <code class="docutils literal notranslate"><span class="pre">SRV</span></code>, path taken from <code class="docutils literal notranslate"><span class="pre">TXT</span> <span class="pre">path</span></code>, or <code class="docutils literal notranslate"><span class="pre">/</span></code> else) is used to fetch Managed DAVx⁵ configuration.</p>
+<p>An example DNS configuration could look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>davdroid-configs.local   IN SRV 1 0 443 internal.example.com
+davdroid-configs.local   IN TXT &quot;path=/davdroid/davdroid-config.json&quot;
+</pre></div>
+</div>
+<p>In this case, Managed DAVx⁵ would try to access the configuration file at <code class="docutils literal notranslate"><span class="pre">https://internal.example.com:443/davdroid/davdroid-config.json</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not join unsafe WiFi networks when you use DNS configuration. Other networks might offer other
+Managed DAVx⁵ configuration files, which could lead to confusion. To avoid this problem, only
+join well-defined WiFi networks (or use Android Enterprise or fixed URL configuration).</p>
+</div>
+</div>
+<div class="section" id="configuration-by-zeroconf-dns-sd">
+<h3>Configuration by Zeroconf (DNS-SD)<a class="headerlink" href="#configuration-by-zeroconf-dns-sd" title="Permalink to this headline">¶</a></h3>
+<p>Managed DAVx⁵ can discover a service called <code class="docutils literal notranslate"><span class="pre">davdroid-configs._tcp</span></code> using <a class="reference external" href="http://www.dns-sd.org/">DNS-SD</a>. The network configuration file URL (<code class="docutils literal notranslate"><span class="pre">https</span></code> scheme) will be built from the host and path parts of <code class="docutils literal notranslate"><span class="pre">TXT</span></code> records (the <code class="docutils literal notranslate"><span class="pre">SRV</span></code> record is not used because the discovery service is not the same as the referenced configuration). If no host is specified, the host name of the host running the avahi service is used. If no path is specified, <code class="docutils literal notranslate"><span class="pre">/</span></code> will be used.</p>
+<p>You can use any DNS-SD server. If you use <a class="reference external" href="https://avahi.org/">avahi</a>, the configuration file could be put into <code class="docutils literal notranslate"><span class="pre">/etc/avahi/services</span></code> and look like this:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot; standalone=&#39;no&#39;?&gt;
+&lt;!DOCTYPE service-group SYSTEM &quot;avahi-service.dtd&quot;&gt;
+&lt;service-group&gt;
+  &lt;name&gt;Managed DAVx⁵ configuration&lt;/name&gt;
+  &lt;service protocol=&quot;ipv4&quot;&gt;
+    &lt;type&gt;_davdroid-configs._tcp&lt;/type&gt;
+    &lt;port&gt;443&lt;/port&gt;
+    &lt;txt-record&gt;host=internal.example.com&lt;/txt-record&gt;
+    &lt;txt-record&gt;path=/public/davdroid-config.json&lt;/txt-record&gt;
+  &lt;/service&gt;
+&lt;/service-group&gt;
+</pre></div>
+</div>
+<p>In this case, Managed DAVx⁵ would try to download the configuration file from <code class="docutils literal notranslate"><span class="pre">https://internal.example.com/public/davdroid-config.json</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Do not join unsafe WiFi networks when you use DNS configuration. Other networks might offer other
+Managed DAVx⁵ configuration files, which could lead to confusion. To avoid this problem, only
+join well-defined WiFi networks (or use Android Enterprise or fixed URL configuration).</p>
+</div>
+</div>
+</div>
+<div class="section" id="configuration-variables">
+<h2>Configuration variables<a class="headerlink" href="#configuration-variables" title="Permalink to this headline">¶</a></h2>
+<p>These variables can be used for Managed DAVx⁵ configuration:</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Configuration variables</span><a class="headerlink" href="#id2" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>license</p></td>
+<td><p>text*</p></td>
+<td><p>license data (JSON without surrounding curly brackets)</p></td>
+</tr>
+<tr class="row-odd"><td><p>license_signature</p></td>
+<td><p>text*</p></td>
+<td><p>license signature (Base64)</p></td>
+</tr>
+<tr class="row-even"><td><p>organization</p></td>
+<td><p>text</p></td>
+<td><p>organization display name; shown in app drawer and login activity</p></td>
+</tr>
+<tr class="row-odd"><td><p>logo_url</p></td>
+<td><p>text (URL)</p></td>
+<td><p>organization logo; shown in login activity; must be publicly accessible without authentication</p></td>
+</tr>
+<tr class="row-even"><td><p>support_homepage_url</p></td>
+<td><p>text (URL)</p></td>
+<td><p>URL of intranet page with details on how to use Managed DAVx⁵ in this organization and how to get internal support; shown in app drawer</p></td>
+</tr>
+<tr class="row-odd"><td><p>support_email_address</p></td>
+<td><p>text (email address)</p></td>
+<td><p>internal support email address – shown in app drawer and some notifications</p></td>
+</tr>
+<tr class="row-even"><td><p>support_phone_number</p></td>
+<td><p>text (phone number)</p></td>
+<td><p>internal support phone number – shown in app drawer and some notifications</p></td>
+</tr>
+<tr class="row-odd"><td><p>login_introduction</p></td>
+<td><p>text (simple HTML)</p></td>
+<td><p>message that will be shown when the user adds an account; may contain simple HTML like paragrahps, bold text and links</p></td>
+</tr>
+<tr class="row-even"><td><p>login_base_url</p></td>
+<td><p>text (URL)*</p></td>
+<td><p>base URL for CalDAV/CardDAV service discovery when an account is added;
+example: <code class="docutils literal notranslate"><span class="pre">https://server.example.com/dav/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>login_user_name</p></td>
+<td><p>text</p></td>
+<td><p>pre-filled user name when an account is added</p></td>
+</tr>
+<tr class="row-even"><td><p>login_password</p></td>
+<td><p>text</p></td>
+<td><p>pre-filled password when an account is added; see security note below</p></td>
+</tr>
+<tr class="row-odd"><td><p>login_lock_credentials</p></td>
+<td><p>boolean</p></td>
+<td><p>whether user name and password are locked (= can’t be edited by the user) in case they are provided by managed configuration</p></td>
+</tr>
+<tr class="row-even"><td><p>login_certificate_alias</p></td>
+<td><p>text</p></td>
+<td><p>if provided, client certificates will be used for authentication (instead of user name/password); value of this field will be pre-selected (if available)</p></td>
+</tr>
+<tr class="row-odd"><td><p>max_accounts</p></td>
+<td><p>integer</p></td>
+<td><p>maximum number of accounts – no new accounts can be created when this number of accounts is reached</p></td>
+</tr>
+<tr class="row-even"><td><p>override_proxy</p></td>
+<td><p>boolean*</p></td>
+<td><div class="line-block">
+<div class="line"><em>true</em> = system proxy settings are ignored and <code class="docutils literal notranslate"><span class="pre">override_proxy_host</span></code> and <code class="docutils literal notranslate"><span class="pre">override_proxy_port</span></code> are used instead</div>
+<div class="line"><em>false</em> = system proxy settings are used</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>override_proxy_host</p></td>
+<td><p>text (host name)</p></td>
+<td><p>HTTP proxy host name</p></td>
+</tr>
+<tr class="row-even"><td><p>override_proxy_port</p></td>
+<td><p>integer (port number)</p></td>
+<td><p>HTTP proxy port number</p></td>
+</tr>
+<tr class="row-odd"><td><p>default_sync_interval</p></td>
+<td><p>integer (number of seconds)</p></td>
+<td><div class="line-block">
+<div class="line">initial sync interval at account creation (contacts/calendars/tasks); default value: 14400 seconds (4 hours). Only these values are eligible: 900 (15 min), 1800 (30 min), 3600 (1 h), 7200 (2 h), 14400 (4 h), 86400 (1 day).</div>
+<div class="line">Can always be overwritten by users. Changing this value will only affect newly created accounts.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>wifi_only</p></td>
+<td><p>boolean</p></td>
+<td><div class="line-block">
+<div class="line"><em>true</em> = DAVx⁵ will only sync when a WiFi connection is active (doesn’t apply to manually forced synchronization)</div>
+<div class="line"><em>false</em> = DAVx⁵ will sync regardless of the connection type</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>wifi_only_ssids</p></td>
+<td><p>text (comma-separated list)</p></td>
+<td><p>when set, DAVx⁵ will only sync when device is connected to one of these WiFis;
+only used when wifi_only is true;
+example: <code class="docutils literal notranslate"><span class="pre">wifi1,wifi2,wifi3</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>contact_group_method</p></td>
+<td><p>text: <code class="docutils literal notranslate"><span class="pre">CATEGORIES</span></code> or <code class="docutils literal notranslate"><span class="pre">GROUP_VCARDS</span></code></p></td>
+<td><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">CATEGORIES</span></code> = contact groups are stored as per-contact category tags</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">GROUP_VCARDS</span></code> = contact groups are separate VCards</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>manage_calendar_colors</p></td>
+<td><p>boolean</p></td>
+<td><div class="line-block">
+<div class="line"><em>true</em> = DAVx⁵ will overwrite local calendar colors with the server colors at every sync</div>
+<div class="line"><em>false</em> = DAVx⁵ won’t change local calendar colors at every sync</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>event_colors</p></td>
+<td><p>boolean</p></td>
+<td><div class="line-block">
+<div class="line"><em>true</em> = DAVx⁵ will synchronize event colors</div>
+<div class="line"><em>false</em> = DAVx⁵ won’t synchronize event colors</div>
+<div class="line">Setting to <em>true</em> causes some default calendar apps to crash → make sure that your preferred calendar app is working with this setting</div>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><p>default_alarm</p></td>
+<td><p>integer (number of minutes)</p></td>
+<td><div class="line-block">
+<div class="line">number of minutes a default reminder will be created before the start of every non-full-day event without reminder; no value (null) or value -1: no default reminders</div>
+<div class="line">Can always be overwritten by users. Changing this value will only affect newly downloaded events.</div>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><p>show_only_personal</p></td>
+<td><p>integer</p></td>
+<td><div class="line-block">
+<div class="line">-1 (default value): user can choose, 0: show all collections, 1: show only collections in the user’s own home-sets</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<p>*… required</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">login_password</span></code> is only recommended with app-specific per-user passwords. Keep in mind that the user
+may be able to retrieve the password even if <code class="docutils literal notranslate"><span class="pre">login_lock_credentials</span></code> is set.</p>
+</div>
+</div>
+<div class="section" id="configuration-file-syntax">
+<h2>Configuration file syntax<a class="headerlink" href="#configuration-file-syntax" title="Permalink to this headline">¶</a></h2>
+<p>For the network or local file configuration method, a Managed DAVx⁵ configuration file is required.
+It contains configuration variables in JSON format, like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="nt">&quot;license&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;escaped JSON, don&#39;t change this&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;license_signature&quot;</span><span class="p">:</span> <span class="s2">&quot;&lt;don&#39;t change this&gt;&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;organization&quot;</span><span class="p">:</span> <span class="s2">&quot;bitfire&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;logo_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://intranet.example.com/your-logo.png&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;support_homepage_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://intranet.example.com/how-to-use-davdroid&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;support_email_address&quot;</span><span class="p">:</span> <span class="s2">&quot;it-support@example.com&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;support_phone_number&quot;</span><span class="p">:</span> <span class="s2">&quot;+1 234 56789&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;login_base_url&quot;</span><span class="p">:</span> <span class="s2">&quot;https://caldav+carddav.example.com/&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;max_accounts&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">&quot;override_proxy&quot;</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nt">&quot;wifi_only&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;wifi_only_ssids&quot;</span><span class="p">:</span> <span class="s2">&quot;wifi1,wifi2&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;contact_group_method&quot;</span><span class="p">:</span> <span class="s2">&quot;GROUP_VCARDS&quot;</span><span class="p">,</span>
+  <span class="nt">&quot;manage_calendar_colors&quot;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&quot;default_sync_interval&quot;</span><span class="p">:</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="nt">&quot;event_colors&quot;</span><span class="p">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="integration.html" class="btn btn-neutral float-left" title="Integration / API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright contributors. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      <span class="lastupdated">Last updated on Nov 07, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

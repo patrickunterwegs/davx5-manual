@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; DAVx⁵ DRAFT documentation</title><link rel="stylesheet" href="_static/css/davx5.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="canonical" href="https://www.davx5.com/manual/introduction.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Accounts and Collections" href="accounts_collections.html" />
+    <link rel="prev" title="DAVx⁵ Manual" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DAVx⁵
+          </a>
+              <div class="version">
+                DRAFT
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-davx5">What is DAVx⁵?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permissions-and-battery-optimization">Permissions and battery optimization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#glossary">Glossary</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="accounts_collections.html">Accounts and Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdav_mounts.html">WebDAV Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_information.html">Technical information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration / API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed_davx5.html">Managed DAVx⁵</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DAVx⁵</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bitfireAT/davx5-manual/blob/main/introduction.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-davx5">
+<h2>What is DAVx⁵?<a class="headerlink" href="#what-is-davx5" title="Permalink to this headline">¶</a></h2>
+<p>DAVx⁵ is a <a class="reference internal" href="#term-caldav"><span class="xref std std-term">CalDAV</span></a>/<a class="reference internal" href="#term-carddav"><span class="xref std std-term">CardDAV</span></a> client (management and sync app) for Android. It allows you to</p>
+<ul class="simple">
+<li><p>manage CalDAV/CardDAV collections (address books, calendars, task lists) on your server and</p></li>
+<li><p>synchronize them with your Android device (to be specifically, with the storage backends of the device, see illustration below).</p></li>
+</ul>
+<p>DAVx⁵ is not:</p>
+<ul class="simple">
+<li><p>a storage backend – This means that your contacts, events and tasks will not be stored within the DAVx⁵ app but in the respective content providers.</p></li>
+<li><p>a contacts, calendar or tasks app – You still need separate apps to view and edit your contacts, events and tasks. You can use any app that uses the Android Contacts/Calendar Provider for contacts/calendars and an OpenTasks provider for tasks.</p></li>
+<li><p>a backup tool – You can use DAVx⁵ to transfer your data to a server, but <strong>make sure to perform server backups on a regular basis.</strong>
+Just imagine that an app you have installed deletes all contacts on your phone: DAVx⁵ will synchronize these deletions as expected and all contacts will be gone on the server, too.</p></li>
+</ul>
+<div class="figure align-default" id="id1">
+<a class="reference external image-reference" href="_images/how_davx5_interacts_with_other_components.png"><img alt="How DAVx⁵ interacts with other components" src="_images/how_davx5_interacts_with_other_components.png" /></a>
+<p class="caption"><span class="caption-text">DAVx⁵ is the interface between the local storage (which is used by the end-user apps) and the CalDAV/CardDAV service.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="first-steps">
+<h2>First steps<a class="headerlink" href="#first-steps" title="Permalink to this headline">¶</a></h2>
+<p>How to start using DAVx⁵ on your Android device:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://www.davx5.com/download">Download</a> and install DAVx⁵.</p></li>
+<li><p>Open DAVx⁵.</p></li>
+<li><p>Follow the instructions of the start screen (permissions, battery saving etc.).</p></li>
+<li><p>Tap on ⊕ to create a new account.</p></li>
+<li><p>Enter your base URL / email address and login credentials.
+You can get the base URL from your service provider and/or our <a class="reference external" href="https://www.davx5.com/tested-with/">list of tested services</a>.</p></li>
+<li><p>Finish the steps to create the account.</p></li>
+<li><p>Select the address books and calendars/task lists you want to have synchronized so that they are shown with checkmark (☑).</p></li>
+<li><p>Force sync (🗘) if you want the data to be available immediately.</p></li>
+<li><p>Access your address books, events and tasks using your favorite apps (Contacts, Calendar, OpenTasks, …).</p></li>
+</ol>
+<p>When you create a contact/event, select the desired DAVx⁵ account as storage location.
+Local contacts/events will stay on your phone and not be synchronized. If you’re using DAVx⁵ the first time, you may
+want to <a class="reference external" href="https://www.davx5.com/faq/existing-contacts-are-not-synced">transfer your local contacts to the CardDAV server</a>.</p>
+<p>On some devices (like Huawei and Xiaomi), <a class="reference external" href="https://www.davx5.com/faq/synchronization-is-not-run-as-expected">additional steps are required to allow DAVx⁵ to run
+automatically</a>.</p>
+</div>
+<div class="section" id="permissions-and-battery-optimization">
+<h2>Permissions and battery optimization<a class="headerlink" href="#permissions-and-battery-optimization" title="Permalink to this headline">¶</a></h2>
+<p>DAVx⁵ requires various Android permissions in order to perform its task.
+It will ask for contacts, events and task access permissions.</p>
+<p>DAVx⁵ will also ask about being whitelisted from battery saving.
+Since Android 6, Android has two features called <em>doze</em> and <em>app standby</em> which reduce battery usage
+by restricting apps which are not interactively used at the moment. This will also
+disable synchronization for apps unless they’re actively used or the device is
+connected to a power supply.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want DAVx⁵ synchronization to be run in regular intervals in the background, DAVx⁵ must be exempt from “battery saving”! This does not mean that DAVx⁵ requires more battery than it should, but only that you allow DAVx⁵ to run in the background for synchronization.</p>
+</div>
+<p>Some devices (e.g. Huawei) also have a vendor-specific autostart permission, which must be granted for DAVx⁵ to work.
+See the <a class="reference external" href="https://www.davx5.com/faq/synchronization-is-not-run-as-expected">FAQ entry about automatic synchronization for more information</a>.</p>
+</div>
+<div class="section" id="glossary">
+<h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h2>
+<p>Some important terms to better understand how DAVx⁵ works:</p>
+<dl class="glossary simple">
+<dt id="term-webdav">WebDAV</dt><dd><p>HTTP-based protocol to manage remote resources (≙ files/directories) and collections (≙ directories). WebDAV collections may contain member resources. Provides methods to list, upload, modify, delete resources and their metadata; locking, access permissions (ACL) etc.</p>
+</dd>
+<dt id="term-caldav">CalDAV</dt><dd><p>Extension for WebDAV to process events (VEVENT) and tasks (VTODO) in iCalendar format. CalDAV servers semantically understand and process entries and can – for instance – filter events so that only events within a certain time range are delivered.</p>
+</dd>
+<dt id="term-caldav-scheduling">CalDAV Scheduling</dt><dd><p>An extension for CalDAV for performing scheduling operations like inviting other people to events, managing attendees and their participation status etc.</p>
+</dd>
+<dt id="term-calendar-provider">Calendar provider</dt><dd><p>On Android devices, there is a database where calendars/events are stored. This database belongs to a system app called
+<a class="reference external" href="https://developer.android.com/guide/topics/providers/calendar-provider">Calendar provider</a>. To access the calendars
+and events, apps communicate with the Calendar provider.</p>
+</dd>
+<dt id="term-carddav">CardDAV</dt><dd><p>Extension for WebDAV to process contacts in vCard format. CardDAV servers semantically understand and process entries.</p>
+</dd>
+<dt id="term-collection">Collection</dt><dd><p>A folder where iCalendar/vCard resources are stored. In CalDAV, collections are calendars/task lists; in CardDAV, they’re address books.</p>
+</dd>
+<dt id="term-contacts-provider">Contacts provider</dt><dd><p>On Android devices, there is a database where contacts are stored. This database belongs to a system app called
+<a class="reference external" href="https://developer.android.com/guide/topics/providers/contacts-provider">Contacts provider</a>. To access the contacts,
+apps communicate with the Contacts provider.</p>
+</dd>
+<dt id="term-icalendar">iCalendar</dt><dd><p>File format to exchange events, tasks, journal entries and busy-time information. Cares about time zones, date/time formats, recurring events and exceptions etc. DAVx⁵ maps Android events and tasks to iCalendar resources and vice versa. Every event/task is stored as a separate iCalendar resource (“.ics file”) on the server.</p>
+</dd>
+<dt id="term-vcard">vCard</dt><dd><p>The “electronic business card” is a file format to exchange contact and contact group information. CardDAV servers are required to support at least vCard 3, but for some advanced features, vCard 4 is needed. DAVx⁵ maps Android contacts and contact groups to vCard resources and vice versa. Every contact is stored as a separate vCard resource (“.vcf file”) on the server.</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="DAVx⁵ Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="accounts_collections.html" class="btn btn-neutral float-right" title="Accounts and Collections" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright contributors. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      <span class="lastupdated">Last updated on Nov 07, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

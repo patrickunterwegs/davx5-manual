@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical information &mdash; DAVx⁵ DRAFT documentation</title><link rel="stylesheet" href="_static/css/davx5.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="canonical" href="https://www.davx5.com/manual/technical_information.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Integration / API" href="integration.html" />
+    <link rel="prev" title="Settings" href="settings.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DAVx⁵
+          </a>
+              <div class="version">
+                DRAFT
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accounts_collections.html">Accounts and Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdav_mounts.html">WebDAV Mounts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="settings.html">Settings</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Technical information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#synchronization">Synchronization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synchronization-logic">Synchronization logic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sync-algorithm-propfind-report">Sync algorithm: PROPFIND/REPORT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sync-algorithm-collection-synchronization">Sync algorithm: Collection Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conflict-handling">Conflict handling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-fields">Supported fields</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#supported-contact-properties">Supported contact properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#name">Name</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#phone-number">Phone number</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#email-address">Email address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#photo">Photo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#organization">Organization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#messenger-sip-address">Messenger / SIP address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#note">Note</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#postal-address">Postal address</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#web-site">Web site</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-date">Event/date</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relation">Relation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contact-groups">Contact groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-labels">Custom labels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unknown-properties">Unknown properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#protected-properties">Protected properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-event-properties">Supported event properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#all-day-events">All-day events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reminders">Reminders</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recurring-events">Recurring events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#group-scheduled-events">Group-scheduled events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#time-zones">Time zones</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#event-classification">Event classification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#categories">Categories</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Extended properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">Unknown properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">Protected properties</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-task-properties">Supported task properties</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Unknown properties</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#webdav-mounts">WebDAV mounts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tls-stack-protocol-versions-ciphers">TLS stack (protocol versions, ciphers)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration / API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed_davx5.html">Managed DAVx⁵</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DAVx⁵</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Technical information</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bitfireAT/davx5-manual/blob/main/technical_information.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="technical-information">
+<h1>Technical information<a class="headerlink" href="#technical-information" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="synchronization">
+<h2>Synchronization<a class="headerlink" href="#synchronization" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="synchronization-logic">
+<h3>Synchronization logic<a class="headerlink" href="#synchronization-logic" title="Permalink to this headline">¶</a></h3>
+<p>These steps are performed when synchronizing a collection:</p>
+<ol class="arabic simple">
+<li><p>Prepare synchronization: prepare local collection, settings etc.</p></li>
+<li><p>Query capabilities with HTTP <code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code>:</p>
+<ul class="simple">
+<li><p>determine whether the server supports Collection Synchronization</p></li>
+<li><p>CardDAV: determine whether the server supports vCard 4</p></li>
+<li><p>fetch current <code class="docutils literal notranslate"><span class="pre">CTag</span></code> and <code class="docutils literal notranslate"><span class="pre">sync-token</span></code></p></li>
+</ul>
+</li>
+<li><p>Process locally deleted resources: if a local resource is flagged as deleted,</p>
+<ul class="simple">
+<li><p>delete it on the server (HTTP <code class="docutils literal notranslate"><span class="pre">DELETE</span></code> with <code class="docutils literal notranslate"><span class="pre">If-Match</span></code>/<code class="docutils literal notranslate"><span class="pre">If-Schedule-Tag-Match</span></code> set to last
+known <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code> to avoid deleting resources which have been changed on the server in the meanwhile) and</p></li>
+<li><p>then remove it locally</p></li>
+</ul>
+</li>
+<li><p>Upload locally modified (“dirty”) resources:</p>
+<ul class="simple">
+<li><p>Assign a random UID (if necessary) and resource name to new resources; prepare contact group and recurring events, if necessary</p></li>
+<li><p>If no previous <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code> of the resource is known (i.e. the resource has not been uploaded yet), use HTTP <code class="docutils literal notranslate"><span class="pre">PUT</span></code> with <code class="docutils literal notranslate"><span class="pre">If-None-Match:</span> <span class="pre">*</span></code> to avoid overwriting a possibly existing resource with the same name</p></li>
+<li><p>If a previous <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code> of the resource is known, use HTTP <code class="docutils literal notranslate"><span class="pre">PUT</span></code> with <code class="docutils literal notranslate"><span class="pre">If-Match</span></code>/<code class="docutils literal notranslate"><span class="pre">If-Schedule-Tag-Match</span></code> set to last known <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code> to avoid overwriting changes which happend on the server in the meanwhile</p></li>
+<li><p>remember returned <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code> as last known <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code>; otherwise reset last known <code class="docutils literal notranslate"><span class="pre">ETag</span></code>/<code class="docutils literal notranslate"><span class="pre">Schedule-Tag</span></code></p></li>
+</ul>
+</li>
+<li><p>Choose sync algorithm (<code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code>/<code class="docutils literal notranslate"><span class="pre">REPORT</span></code> vs. Collection Synchronization):</p>
+<ul class="simple">
+<li><p>CardDAV: use Collection Synchronization if supported by server, <code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code> otherwise</p></li>
+<li><p>CalDAV events: use Collection Synchronization if supported by server and past time event limit is disabled, <code class="docutils literal notranslate"><span class="pre">REPORT</span> <span class="pre">calendar-query</span></code> otherwise</p></li>
+<li><p>CalDAV tasks: use <code class="docutils literal notranslate"><span class="pre">REPORT</span> <span class="pre">calendar-query</span></code></p></li>
+</ul>
+</li>
+<li><p>Check whether further synchronization is needed. Only continue when:</p>
+<ul class="simple">
+<li><p>modifications (uploads/deletions) have been sent to the server, or</p></li>
+<li><p>the sync state (<code class="docutils literal notranslate"><span class="pre">CTag</span></code>/<code class="docutils literal notranslate"><span class="pre">sync-token</span></code>) of the collection has changed since last sync, or</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code>/<code class="docutils literal notranslate"><span class="pre">REPORT</span></code> algorithm shall be used and the sync has been initiated manually</p></li>
+</ul>
+</li>
+<li><p>Continue with chosen sync algorithm (see below).</p></li>
+</ol>
+</div>
+<div class="section" id="sync-algorithm-propfind-report">
+<h3>Sync algorithm: PROPFIND/REPORT<a class="headerlink" href="#sync-algorithm-propfind-report" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Unset <em>present remotely</em> flag for all resources.</p></li>
+<li><p>List and process remote resources (only names and <code class="docutils literal notranslate"><span class="pre">ETag</span></code>) using <code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code> or <code class="docutils literal notranslate"><span class="pre">REPORT</span></code> (see above).</p>
+<ul class="simple">
+<li><p>Download resources which have been added/modififed remotely in bunches using <code class="docutils literal notranslate"><span class="pre">REPORT</span> <span class="pre">addressbook-multiget/calendar-multiget</span></code> into the local storage.</p></li>
+<li><p>Set <em>present remotely</em> flag for all received resources.</p></li>
+</ul>
+</li>
+<li><p>Locally delete all resources which are not flagged as <em>present remotely</em>.</p></li>
+<li><p>Post-processing: clean up empty contact groups etc.</p></li>
+<li><p>Save sync state (<code class="docutils literal notranslate"><span class="pre">CTag</span></code>/<code class="docutils literal notranslate"><span class="pre">sync-token</span></code>).</p></li>
+</ol>
+</div>
+<div class="section" id="sync-algorithm-collection-synchronization">
+<h3>Sync algorithm: Collection Synchronization<a class="headerlink" href="#sync-algorithm-collection-synchronization" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Was a previous <em>initial sync</em> aborted and is now being continued? → If yes, set <em>initial sync</em>.</p></li>
+<li><p>Do we have a previous <code class="docutils literal notranslate"><span class="pre">sync-token</span></code>? → If no, set <em>initial sync</em>.</p></li>
+<li><p>List and process changes since last <code class="docutils literal notranslate"><span class="pre">sync-token</span></code> (or all records if no previous <code class="docutils literal notranslate"><span class="pre">sync-token</span></code> is known) using <code class="docutils literal notranslate"><span class="pre">REPORT</span> <span class="pre">sync-collection</span></code>.</p>
+<ul class="simple">
+<li><p>Download resources which have been added/modififed remotely in bunches using <code class="docutils literal notranslate"><span class="pre">REPORT</span> <span class="pre">addressbook-multiget/calendar-multiget</span></code> into the local storage.</p></li>
+<li><p>Set <em>present remotely</em> flag for all received resources.</p></li>
+</ul>
+</li>
+<li><p>If the requested <code class="docutils literal notranslate"><span class="pre">sync-token</span></code> was invalid:</p>
+<ul class="simple">
+<li><p>forget the <code class="docutils literal notranslate"><span class="pre">sync-token</span></code></p></li>
+<li><p>reset <em>present remotely</em> flags of all local resources</p></li>
+<li><p>set <em>initial sync</em> and continue with 3.</p></li>
+</ul>
+</li>
+<li><p>Save <code class="docutils literal notranslate"><span class="pre">sync-token</span></code>.</p></li>
+<li><p>Are there further changes on the server (HTTP 507 on collection URL in multiget response)? → If yes, continue with 3.</p></li>
+<li><p>Only for <em>initial sync</em>: delete all local resources which are not present remotely.</p></li>
+<li><p>Post-processing: clean up empty contact groups etc.</p></li>
+</ol>
+</div>
+<div class="section" id="conflict-handling">
+<h3>Conflict handling<a class="headerlink" href="#conflict-handling" title="Permalink to this headline">¶</a></h3>
+<p>Conflicts occur when different versions of a resource are available and it’s ambigous which one shall be used. For instance:</p>
+<ol class="arabic simple">
+<li><p>A contact exists on the server and has been synchronized to a mobile phone with DAVx⁵ and to a desktop PC with Gnome Evolution.</p></li>
+<li><p>You modify the contact with Evolution, which immediately uploads it to the server.</p></li>
+<li><p>You modify the same contact on your mobile device, too.</p></li>
+<li><p>DAVx⁵ wants to upload the modified contact and finds that it has been changed on the server in the meanwhile. Now there’s a conflict of two different versions of this contact.</p></li>
+</ol>
+<p>How DAVx⁵ handles such conflicts:</p>
+<ul class="simple">
+<li><p>DAVx⁵ relies on HTTP <code class="docutils literal notranslate"><span class="pre">ETag</span></code> to determine whether a resource has been changed on the server.</p></li>
+<li><p><strong>The server always wins.</strong> If a local resource can’t be uploaded or deleted safely because it has been modified on the server in the meanwhile, local changes are discarded and the server version is used.</p></li>
+<li><p>DAVx⁵ doesn’t involve the user in resolving conflicts (like asking which version shall be used) because it’s supposed to run in the background silently.</p></li>
+</ul>
+<p>At the moment, DAVx⁵ doesn’t support <a class="reference external" href="https://tools.ietf.org/html/rfc6350#section-7">automatic vCard merging as suggested in vCard 4</a>.</p>
+</div>
+</div>
+<div class="section" id="supported-fields">
+<h2>Supported fields<a class="headerlink" href="#supported-fields" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="supported-contact-properties">
+<h3>Supported contact properties<a class="headerlink" href="#supported-contact-properties" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="name">
+<h4>Name<a class="headerlink" href="#name" title="Permalink to this headline">¶</a></h4>
+<p>These vCard properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredName">ContactsContract.CommonDataKinds.StructuredName</a> records:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FN</span></code> ↔ display name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N</span></code> ↔ prefix, given name, middle name, family name, suffix</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-PHONETIC-FIRST-NAME</span></code> ↔ phonetic given name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-PHONETIC-MIDDLE-NAME</span></code> ↔ phonetic middle name</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X-PHONETIC-LAST-NAME</span></code> ↔ phonetic first name</p></li>
+</ul>
+</div></blockquote>
+<p>These vCard properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Nickname">ContactsContract.CommonDataKinds.Nickname</a> records:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">NICKNAME</span></code> ↔ nick name (types are mapped as <code class="docutils literal notranslate"><span class="pre">TYPE</span></code> x-values)</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="phone-number">
+<h4>Phone number<a class="headerlink" href="#phone-number" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">TEL</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Phone">ContactsContract.CommonDataKinds.Phone</a> records (phone number).</p>
+<p>Types like private, work etc. are mapped when possible. Not all vCard values have a corresponding Android value and vice versa.
+<a class="reference internal" href="#custom-labels"><span class="std std-ref">Custom labels are supported.</span></a></p>
+</div>
+<div class="section" id="email-address">
+<h4>Email address<a class="headerlink" href="#email-address" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">EMAIL</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Email">ContactsContract.CommonDataKinds.Email</a> records (email address).</p>
+<p>Types like private, work etc. are mapped when possible. Not all vCard values have a corresponding Android value and vice versa.
+<a class="reference internal" href="#custom-labels"><span class="std std-ref">Custom labels are supported.</span></a></p>
+</div>
+<div class="section" id="photo">
+<h4>Photo<a class="headerlink" href="#photo" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">PHOTO</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Photo">ContactsContract.CommonDataKinds.Photo</a> records.</p>
+<p>Because of <a class="reference external" href="https://code.google.com/p/android/issues/detail?id=226875">Android limitations</a>, contact photos with more than 1 MB can’t be
+stored in the Android contacts provider, so DAVx⁵ has to resize large vCard photos to the values given by
+<a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.DisplayPhoto#CONTENT_MAX_DIMENSIONS_URI">CONTENT_MAX_DIMENSIONS_URI</a>.
+This limit does not apply in the other direction (Android → vCard).</p>
+</div>
+<div class="section" id="organization">
+<h4>Organization<a class="headerlink" href="#organization" title="Permalink to this headline">¶</a></h4>
+<p>These vCard properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Organization">ContactsContract.CommonDataKinds.Organization</a> records:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ORG</span></code> ↔ company, department</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TITLE</span></code> ↔ (job) title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ROLE</span></code> ↔ job description</p></li>
+</ul>
+</div>
+<div class="section" id="messenger-sip-address">
+<h4>Messenger / SIP address<a class="headerlink" href="#messenger-sip-address" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">IMPP</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Im">ContactsContract.CommonDataKinds.Im</a>
+(messenger account) and – if the URI scheme is <code class="docutils literal notranslate"><span class="pre">sip:</span></code> – <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.SipAddress">ContactsContract.CommonDataKinds.SipAddress</a> (SIP address) records.</p>
+<p>Types like private, work etc. are mapped when possible. Not all vCard values have a corresponding Android value and vice versa.
+<a class="reference internal" href="#custom-labels"><span class="std std-ref">Custom labels are supported.</span></a></p>
+<p>When importing a vCard, <code class="docutils literal notranslate"><span class="pre">X-SIP</span></code> values are treated like <code class="docutils literal notranslate"><span class="pre">IMPP:sip:...</span></code> and stored as SIP address.</p>
+</div>
+<div class="section" id="note">
+<h4>Note<a class="headerlink" href="#note" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">NOTE</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Note">ContactsContract.CommonDataKinds.Note</a> records (note).</p>
+</div>
+<div class="section" id="postal-address">
+<h4>Postal address<a class="headerlink" href="#postal-address" title="Permalink to this headline">¶</a></h4>
+<p>These vCard properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.StructuredPostal">ContactsContract.CommonDataKinds.StructuredPostal</a> records:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ADR</span></code> ↔ street address, p/o box, extended address, locality, region, postal code, country, vCard 4: formatted address</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LABEL</span></code> ↔ vCard3: formatted address</p></li>
+</ul>
+<p>Types like private, work etc. are mapped when possible. Not all vCard values have a corresponding Android value and vice versa.
+<a class="reference internal" href="#custom-labels"><span class="std std-ref">Custom labels are supported.</span></a></p>
+<p>If a vCard doesn’t contain a formatted address, it will be generated by DAVx⁵ in this format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>street po.box (extended)
+postcode city
+region
+COUNTRY
+</pre></div>
+</div>
+</div>
+<div class="section" id="web-site">
+<h4>Web site<a class="headerlink" href="#web-site" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">URL</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Website">ContactsContract.CommonDataKinds.Website</a> records (Web site).</p>
+<p>Types like private, work etc. are mapped when possible. Not all vCard values have a corresponding Android value and vice versa.
+<a class="reference internal" href="#custom-labels"><span class="std std-ref">Custom labels are supported.</span></a></p>
+</div>
+<div class="section" id="event-date">
+<h4>Event/date<a class="headerlink" href="#event-date" title="Permalink to this headline">¶</a></h4>
+<p>These vCard properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Event">ContactsContract.CommonDataKinds.Event</a> records:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">BDAY</span></code> ↔ birthday</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ANNIVERSARY</span></code> ↔ anniversary</p></li>
+</ul>
+<p>Partial dates without year are supported.</p>
+</div>
+<div class="section" id="relation">
+<h4>Relation<a class="headerlink" href="#relation" title="Permalink to this headline">¶</a></h4>
+<p>vCard <code class="docutils literal notranslate"><span class="pre">RELATED</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.Relation">ContactsContract.CommonDataKinds.Relation</a> records (relation).</p>
+<p>Not all vCard values have a corresponding Android value and vice versa. Custom relation names are supported.</p>
+</div>
+<div class="section" id="contact-groups">
+<span id="id1"></span><h4>Contact groups<a class="headerlink" href="#contact-groups" title="Permalink to this headline">¶</a></h4>
+<p>If the <em>Groups are per-contact categories</em> method is set in the account settings, DAVx⁵ will match contact groups
+to <code class="docutils literal notranslate"><span class="pre">CATEGORIES</span></code>. For instance, when a contact is in the groups “Friends” and “Family”, this property will be added: <code class="docutils literal notranslate"><span class="pre">CATEGORIES:Friends,Family</span></code>.</p>
+<p>If the <em>Groups are separate vCards</em> method is set in the account settings, DAVx⁵ will use</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">KIND</span></code> (or <code class="docutils literal notranslate"><span class="pre">X-ADDRESSBOOKSERVER-KIND</span></code> if the server doesn’t support VCard 4) to distinguish between contacts and contact groups, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MEMBER</span></code> (or <code class="docutils literal notranslate"><span class="pre">X-ADDRESSBOOKSERVER-MEMBER</span></code> if the server doesn’t support VCard 4) to store contact group members.</p></li>
+</ul>
+</div>
+<div class="section" id="custom-labels">
+<span id="id2"></span><h4>Custom labels<a class="headerlink" href="#custom-labels" title="Permalink to this headline">¶</a></h4>
+<p>For some properties, custom labels are supported by vCard property groups. For custom labels, the <code class="docutils literal notranslate"><span class="pre">X-ABLABEL</span></code> property is used like that:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>BEGIN:VCARD
+...
+davdroid1.TEL:+123456
+davdroid1.X-ABLABEL:My Custom Phone
+davdroid2.EMAIL:test@example.com
+davdroid2.X-ABLABEL:My Custom Email Address
+...
+END:VCARD
+</pre></div>
+</div>
+<p>In this example, the phone number <em>+123456</em> is <a class="reference external" href="https://tools.ietf.org/html/rfc6350#page-8">grouped together</a> with the custom label “My Custom Phone” and the email address <em>test&#64;example.com</em> is labelled “My Custom Email Address”.</p>
+</div>
+<div class="section" id="unknown-properties">
+<h4>Unknown properties<a class="headerlink" href="#unknown-properties" title="Permalink to this headline">¶</a></h4>
+<p>Contact properties which are not processed by DAVx⁵ (like <code class="docutils literal notranslate"><span class="pre">X-</span></code> properties) are retained. When importing a vCard, DAVx⁵ saves all unknown properties.
+When the respective contact is modified and DAVx⁵ generates the vCard again, it starts with all unknown properties and then adds the known ones.</p>
+</div>
+<div class="section" id="protected-properties">
+<h4>Protected properties<a class="headerlink" href="#protected-properties" title="Permalink to this headline">¶</a></h4>
+<p>These vCard properties are processed/generated by DAVx⁵ and cannot be changed by users:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PRODID</span></code> is set to the DAVx⁵ identifier</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UID</span></code> is used to identify a vCard (for new vCards, a random UUID will be generated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">REV</span></code> is set to the current time when generating a vCard</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SOURCE</span></code> is removed because it doesn’t apply anymore as soon as DAVx⁵ generates the vCard</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOGO</span></code>, <code class="docutils literal notranslate"><span class="pre">SOUND</span></code> are removed because retaining them might cause out-of-memory errors</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="supported-event-properties">
+<h3>Supported event properties<a class="headerlink" href="#supported-event-properties" title="Permalink to this headline">¶</a></h3>
+<p>Events are stored as <a class="reference external" href="https://developer.android.com/reference/android/provider/CalendarContract.Events">CalendarContract.Events</a>
+in the Android calendar provider. These iCalendar properties are directly mapped to Android fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">SUMMARY</span></code> ↔ title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOCATION</span></code> ↔ event location</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code> ↔ description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COLOR</span></code> ↔ event color (only if enabled in DAVx⁵ account settings)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DTSTART</span></code> ↔ start date/time, event timezone / all-day event</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DTEND</span></code>, <code class="docutils literal notranslate"><span class="pre">DURATION</span></code> ↔ end date/time, event end timezone / all-day event</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLASS</span></code> ↔ <a class="reference internal" href="#access-level"><span class="std std-ref">access level</span></a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TRANSP</span></code> ↔ availability (opaque ↔ busy, transparent ↔ free)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STATUS</span></code> ↔ status (confirmed/tentative/cancelled)</p></li>
+</ul>
+<div class="section" id="all-day-events">
+<h4>All-day events<a class="headerlink" href="#all-day-events" title="Permalink to this headline">¶</a></h4>
+<p>Events are considered to be all-day events when <code class="docutils literal notranslate"><span class="pre">DTSTART</span></code> is a date (and not a time). All-day events</p>
+<ul class="simple">
+<li><p>without end date or</p></li>
+<li><p>with an end date that is not after the start date</p></li>
+</ul>
+<p>are stored with a duration of one day for Android compatibility.</p>
+</div>
+<div class="section" id="reminders">
+<h4>Reminders<a class="headerlink" href="#reminders" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">VALARM</span></code> components are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/CalendarContract.Reminders">CalendarContract.Reminders</a> records and vice versa.</p>
+<p>Reminder methods (<code class="docutils literal notranslate"><span class="pre">ACTION</span></code>) are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/CalendarContract.RemindersColumns#METHOD">Android values</a> as good as possible.</p>
+</div>
+<div class="section" id="recurring-events">
+<span id="id3"></span><h4>Recurring events<a class="headerlink" href="#recurring-events" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">RRULE</span></code>, <code class="docutils literal notranslate"><span class="pre">RDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">EXRULE</span></code> and <code class="docutils literal notranslate"><span class="pre">EXDATE</span></code> values are stored in the respective Android event fields. The Android calendar provider uses these fields to calculcate the instances of a recurring event, which are then saved as CalendarContract.Instances so that calendar apps can access them.</p>
+<p>Exceptions of recurring events are identified by <code class="docutils literal notranslate"><span class="pre">RECURRENCE-ID</span></code>. DAVx⁵ inserts exceptions as separate event records with <code class="docutils literal notranslate"><span class="pre">ORIGINAL_SYNC_ID</span></code> set to the <code class="docutils literal notranslate"><span class="pre">SYNC_ID</span></code> of the recurring event and <code class="docutils literal notranslate"><span class="pre">ORIGINAL_TIME</span></code> set to the <code class="docutils literal notranslate"><span class="pre">RECURRENCE-ID</span></code> value.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>DAVx⁵ is not responsible for calculating the instances of a recurring event.
+It only provides <code class="docutils literal notranslate"><span class="pre">RRULE</span></code>, <code class="docutils literal notranslate"><span class="pre">RDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">EXRULE</span></code>, <code class="docutils literal notranslate"><span class="pre">EXDATE</span></code> and a list of exceptions to the Android calendar provider.</p>
+</div>
+</div>
+<div class="section" id="group-scheduled-events">
+<h4>Group-scheduled events<a class="headerlink" href="#group-scheduled-events" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">ATTENDEE</span></code> properties are mapped to <a class="reference external" href="https://developer.android.com/reference/android/provider/CalendarContract.AttendeesColumns">CalendarContract.AttendeesColumns</a> records and vice versa.</p>
+<p>Events with at least one attendee are considered to be group-scheduled events. Only for group-scheduled events, the <code class="docutils literal notranslate"><span class="pre">ORGANIZER</span></code> property</p>
+<ul class="simple">
+<li><p>is imported from iCalendars to the Android event so that only the organizer can edit a group-scheduled event,</p></li>
+<li><p>is exported from the Android event to the iCalendar.</p></li>
+</ul>
+<p>When you add attendees to an event, the server may send invitations to the attendees (for instance, by email).
+DAVx⁵ doesn’t send invitation emails on its own.</p>
+</div>
+<div class="section" id="time-zones">
+<h4>Time zones<a class="headerlink" href="#time-zones" title="Permalink to this headline">¶</a></h4>
+<p>Thanks to <a class="reference external" href="https://github.com/ical4j/ical4j">ical4j</a>, DAVx⁵ is able to really process time zone definitions of events
+(<code class="docutils literal notranslate"><span class="pre">VTIMEZONE</span></code>). If a certain time zone is referenced by identifier but <code class="docutils literal notranslate"><span class="pre">VTIMEZONE</span></code> component is provided,
+DAVx⁵ uses the <a class="reference external" href="https://github.com/ical4j/ical4j/wiki/Timezones">default time zone definitions from ical4j (Olson DB)</a>.</p>
+<p>When an iCalendar references a time zone which is not available in Android, DAVx⁵ tries to find an available time zone
+with (partially) matching name. If no such time zone is found, the system default time zone is used. The original value will
+be shifted to the available time zone.</p>
+<p>For instance, if an event has a start time of <em>10:00 Custom Time Zone</em>, DAVx⁵ will
+use the <em>Custom Time Zone</em> <code class="docutils literal notranslate"><span class="pre">VTIMEZONE</span></code> to calculate the corresponding time in the system default time zone,
+let’s say 12:00 <em>Europe/Vienna</em>, and then save the event as 12:00 <em>Europe/Vienna</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because the Android calendar provider can only process events with time zones which are available in Android, recurring events in time zones which are not available in Android and their exceptions may not be expanded correctly.</p>
+</div>
+</div>
+<div class="section" id="event-classification">
+<span id="access-level"></span><h4>Event classification<a class="headerlink" href="#event-classification" title="Permalink to this headline">¶</a></h4>
+<p>iCalendar <a class="reference external" href="https://tools.ietf.org/html/rfc5545#section-3.8.1.3">event classification</a> is mapped to
+<a class="reference external" href="https://developer.android.com/reference/android/provider/CalendarContract.EventsColumns#ACCESS_LEVEL">Android’s ACCESS_LEVEL</a> like that:</p>
+<ul class="simple">
+<li><p>no <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> → <code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_DEFAULT</span></code> (“server default”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLASS:PUBLIC</span></code> → <code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_PUBLIC</span></code> (“public”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLASS:PRIVATE</span></code> → <code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_PRIVATE</span></code> (“private”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CLASS:CONFIDENTIAL</span></code> → <code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_CONFIDENTIAL</span></code> (currently not supported by many calendar apps, which will reset the access level to <code class="docutils literal notranslate"><span class="pre">ACCESS_DEFAULT</span></code> or <code class="docutils literal notranslate"><span class="pre">ACCESS_PRIVATE</span></code> when the event is edited); additionally, <code class="docutils literal notranslate"><span class="pre">CONFIDENTIAL</span></code> is stored as <em>original value</em></p></li>
+<li><p>other <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> value (x-name or iana-token) → <code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_PRIVATE</span></code>; additionally, the value is stored as <em>original value</em></p></li>
+</ul>
+<p>In the other direction, the locally stored access level is mapped to <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> like that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_PUBLIC</span></code> (“public”) → <code class="docutils literal notranslate"><span class="pre">CLASS:PUBLIC</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_PRIVATE</span></code> (“private”) → <code class="docutils literal notranslate"><span class="pre">CLASS:PRIVATE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_CONFIDENTIAL</span></code> (“confidential”, if available in calendar app) → <code class="docutils literal notranslate"><span class="pre">CLASS:CONFIDENTIAL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ACCESS_LEVEL</span></code> = <code class="docutils literal notranslate"><span class="pre">ACCESS_DEFAULT</span></code> (“server default”) →</p>
+<ul>
+<li><p>if there is an <em>original value</em>: use that value</p></li>
+<li><p>no <code class="docutils literal notranslate"><span class="pre">CLASS</span></code> otherwise (same as <code class="docutils literal notranslate"><span class="pre">PUBLIC</span></code>)</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="categories">
+<h4>Categories<a class="headerlink" href="#categories" title="Permalink to this headline">¶</a></h4>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.6.2: </span>In earlier versions, event categories were treated as unknown properties (see below).</p>
+</div>
+<p>iCalendar <code class="docutils literal notranslate"><span class="pre">CATEGORIES</span></code> are mapped from/to <a class="reference external" href="https://developer.android.com/reference/kotlin/android/provider/CalendarContract.ExtendedProperties">extended properties</a>
+with these fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> = <code class="docutils literal notranslate"><span class="pre">categories</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code> = list of category names, separated by backslash (<code class="docutils literal notranslate"><span class="pre">\</span></code>), for example: <code class="docutils literal notranslate"><span class="pre">Cat</span> <span class="pre">A\Cat</span> <span class="pre">B\Cat</span> <span class="pre">C</span></code>. If a
+category name contains a backslash, the backslash will be dropped silenty.</p></li>
+</ul>
+<p>This is the same format as it <a class="reference external" href="https://android.googlesource.com/platform/packages/apps/Exchange/+/refs/tags/android-6.0.1_r31/src/com/android/exchange/eas/EasSyncCalendar.java#107">is used by the AOSP ActiveSync Exchange sync adapter</a>.</p>
+</div>
+<div class="section" id="id5">
+<h4>Extended properties<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>These properties are not natively supported by Android, but are synchronized as <cite>extended properties</cite> with
+a format defined by DAVx⁵:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">URL</span></code></p></li>
+</ul>
+<p>See <a class="reference internal" href="integration.html#extended-event-properties"><span class="std std-ref">extended event properties</span></a> for more information.</p>
+</div>
+<div class="section" id="id6">
+<h4>Unknown properties<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p id="event-unknown-properties">iCalendar properties which are not processed by DAVx⁵ (like <code class="docutils literal notranslate"><span class="pre">X-</span></code> properties) are retained (unless they’re larger than ≈ 25 kB).
+When importing an iCalendar, DAVx⁵ saves all unknown event properties as extended property rows.
+When the respective event is modified and DAVx⁵ generates the iCalendar again, it will include all unknown properties.</p>
+</div>
+<div class="section" id="id7">
+<h4>Protected properties<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h4>
+<p>These iCalendar properties are processed/generated by DAVx⁵ and cannot be changed by users:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PRODID</span></code> is set to the DAVx⁵ identifier</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UID</span></code> is used to identify an iCalendar (for new iCalendars, a random UUID will be generated)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RECURRENCE-ID</span></code> is used to identify certain instances of recurring events</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SEQUENCE</span></code> is increased when an iCalendar is modified</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DTSTAMP</span></code> is set to the current time when generating an iCalendar</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="supported-task-properties">
+<h3>Supported task properties<a class="headerlink" href="#supported-task-properties" title="Permalink to this headline">¶</a></h3>
+<p>DAVx⁵ synchronizes <code class="docutils literal notranslate"><span class="pre">VTODO</span></code> components (= tasks) with the OpenTasks provider, so
+<a class="reference external" href="https://play.google.com/store/apps/details?id=org.dmfs.tasks">OpenTasks</a> or <a class="reference external" href="https://tasks.org/">tasks.org</a>
+must be installed for task synchronization.</p>
+<p>To use some features (for instance, to see subtasks as indented task) in the UI, you may need
+another tasks app that is able to access the OpenTasks provider, like <a class="reference external" href="https://play.google.com/store/apps/details?id=org.withouthat.acalendarplus">aCalendar+</a>.</p>
+<p>These properties are synchronized by DAVx⁵:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UID</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SUMMARY</span></code>, <code class="docutils literal notranslate"><span class="pre">DESCRIPTION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LOCATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GEO</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">URL</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ORGANIZER</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PRIORITY</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">COMPLETED</span></code>, <code class="docutils literal notranslate"><span class="pre">PERCENT-COMPLETE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">STATUS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CREATED</span></code>, <code class="docutils literal notranslate"><span class="pre">LAST-MODIFIED</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DTSTART</span></code>, <code class="docutils literal notranslate"><span class="pre">DUE</span></code>, <code class="docutils literal notranslate"><span class="pre">DURATION</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">EXDATE</span></code>, <code class="docutils literal notranslate"><span class="pre">RRULE</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CATEGORIES</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RELATED-TO</span></code> (used for subtasks)</p></li>
+</ul>
+<div class="section" id="id8">
+<h4>Unknown properties<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>See <a class="reference internal" href="#event-unknown-properties"><span class="std std-ref">unknown properties of events</span></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="webdav-mounts">
+<h2>WebDAV mounts<a class="headerlink" href="#webdav-mounts" title="Permalink to this headline">¶</a></h2>
+<p><strong>Detection:</strong> DAVx⁵ uses <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> to detect whether a URL is WebDAV-capable. It expects at least compliance class 1 (<code class="docutils literal notranslate"><span class="pre">DAV:</span> <span class="pre">1</span></code>).</p>
+<p><strong>Supported features</strong>:</p>
+<ul>
+<li><p>Directory listing (<code class="docutils literal notranslate"><span class="pre">PROPFIND</span></code>)</p>
+<ul class="simple">
+<li><p>WebDAV quota (RFC 4331) of root directory is shown in <em>DAVx⁵ WebDAV mounts</em></p></li>
+</ul>
+</li>
+<li><p>Random-access read (<code class="docutils literal notranslate"><span class="pre">GET</span></code> with <code class="docutils literal notranslate"><span class="pre">Range</span></code> headers) for files opened with mode <code class="docutils literal notranslate"><span class="pre">r</span></code></p>
+<ul class="simple">
+<li><p>that have a known file size,</p></li>
+<li><p>that have an <code class="docutils literal notranslate"><span class="pre">ETag</span></code> or <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code>,</p></li>
+<li><p>on Android 8+ only.</p></li>
+</ul>
+<p>This allows things like seeking in videos or extracting data from a file
+without reading the whole file.</p>
+<p>A page cache with a page size of 2 MB is used, so files will be requested in
+pieces of 2 MB, regardless of the actual read operations.</p>
+</li>
+<li><p>Atomic (streaming) read (<code class="docutils literal notranslate"><span class="pre">GET</span></code>) for files opened with mode <code class="docutils literal notranslate"><span class="pre">r</span></code> that can’t be opened in random-access mode</p></li>
+<li><p>Atomic (streaming) write (<code class="docutils literal notranslate"><span class="pre">PUT</span></code>) for files opened with mode <code class="docutils literal notranslate"><span class="pre">w</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="tls-stack-protocol-versions-ciphers">
+<h2>TLS stack (protocol versions, ciphers)<a class="headerlink" href="#tls-stack-protocol-versions-ciphers" title="Permalink to this headline">¶</a></h2>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 2.5: </span>DAVx⁵ uses <a class="reference external" href="https://github.com/google/conscrypt/blob/master/CAPABILITIES.md">Conscrypt</a> to support modern TLS protocol versions and ciphers
+even on older devices. Both your client (DAVx⁵) and the CalDAV/CardDAV server must share at least one cipher, otherwise a <code class="docutils literal notranslate"><span class="pre">SSLProtocolException</span></code> will occur.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="settings.html" class="btn btn-neutral float-left" title="Settings" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="integration.html" class="btn btn-neutral float-right" title="Integration / API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright contributors. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      <span class="lastupdated">Last updated on Nov 07, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings &mdash; DAVx⁵ DRAFT documentation</title><link rel="stylesheet" href="_static/css/davx5.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="canonical" href="https://www.davx5.com/manual/settings.html"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Technical information" href="technical_information.html" />
+    <link rel="prev" title="WebDAV Mounts" href="webdav_mounts.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> DAVx⁵
+          </a>
+              <div class="version">
+                DRAFT
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="accounts_collections.html">Accounts and Collections</a></li>
+<li class="toctree-l1"><a class="reference internal" href="webdav_mounts.html">WebDAV Mounts</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Settings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#system-wide-settings">System-wide settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#app-wide-settings">App-wide settings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#account-settings">Account settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#synchronization">Synchronization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#caldav">CalDAV</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#carddav">CardDAV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="technical_information.html">Technical information</a></li>
+<li class="toctree-l1"><a class="reference internal" href="integration.html">Integration / API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="managed_davx5.html">Managed DAVx⁵</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">DAVx⁵</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Settings</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/bitfireAT/davx5-manual/blob/main/settings.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="settings">
+<h1>Settings<a class="headerlink" href="#settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="system-wide-settings">
+<h2>System-wide settings<a class="headerlink" href="#system-wide-settings" title="Permalink to this headline">¶</a></h2>
+<p>DAVx⁵ makes use of system proxy settings, unless you use app-wide settings to override them. Only HTTP(S) proxies will be used. System proxy settings can most importantly be found in</p>
+<ul class="simple">
+<li><p>Android APN settings (for mobile network connections; defined by network provider),</p></li>
+<li><p>Android WiFi settings (for WiFi connections; defined when adding a WiFi network).</p></li>
+</ul>
+<p>Your network provider may have defined a system proxy in APN settings that you’re not aware of. Check in case of networking problems.</p>
+</div>
+<div class="section" id="app-wide-settings">
+<h2>App-wide settings<a class="headerlink" href="#app-wide-settings" title="Permalink to this headline">¶</a></h2>
+<p>There are some settings that apply to the whole DAVx⁵ app. You can access them in the DAVx⁵ navigation drawer / Settings.</p>
+<dl class="simple">
+<dt>Show debug info</dt><dd><p>Shows important information about your device and the current system state, DAVx⁵ accounts (including collection URLs) etc. Use this information to narrow down sync problems systematically. Can be shared to email or other apps.</p>
+</dd>
+<dt>Verbose logging</dt><dd><p>If this option is enabled, DAVx⁵ will create a verbose log file which contain various status messages and the whole HTTP traffic. A permanent notification will appear which you can use to send this log to any app, including email, <a class="reference external" href="https://github.com/marcosdiez/shareviahttp">Share via HTTP</a>, or <a class="reference external" href="https://github.com/TeamAmaze/AmazeFileManager">Amaze</a>’s “Save to file”. Use this log file to narrow down sync problems systematically. (You may have to expand the notification to see the “Send” action.) As soon as you turn off verbose logging, the log will be deleted and the notification cancelled.</p>
+</dd>
+<dt>Keep in foreground</dt><dd><p>If this option is enabled, DAVx⁵ will display a permanent notification. This notification keeps DAVx⁵ always in foreground, so that vendor specific background-app-killing (so-called battery saving “features” which may prevent background sync processes) hopefully won’t apply to DAVx⁵ anymore. This is a low-priority status message notification, which is only displayed if you pull down the notifications. It can be silented (=still running but not displayed) in the notifcation channels, too. Using this option will not increase battery consumption of DAVx⁵.</p>
+</dd>
+<dt>Override proxy settings</dt><dd><p>Allows to override the system proxy settings (see above). If this option is enabled, you have to specify a HTTP(S) proxy which is used instead of the system proxy. Can be used to route all DAVx⁵ traffic through a certain proxy, for instance a Tor proxy.</p>
+</dd>
+<dt>Distrust system certificates</dt><dd><p>If this option is enabled, system-wide CA certificates will not be trusted automatically. In this case, every certificate has to be verified and accepted explicitly.</p>
+</dd>
+<dt>Reset (un)trusted certificates</dt><dd><p>Clears the app key stores where both previously trusted and rejected certificates are saved. If those certificates are encountered again, they will have to be verified again.</p>
+</dd>
+<dt>App permissions</dt><dd><p>Opens the dialog where you can manage DAVx⁵ permissions.</p>
+</dd>
+<dt>Notification settings</dt><dd><p>Allows you to change appearance and priority of various DAVx⁵ notifications.</p>
+</dd>
+<dt>Reset hints</dt><dd><p>When DAVx⁵ is started the first time, there are some setup hints. Use this option to make all hints that have been previously dismissed re-appear (if applicable).</p>
+</dd>
+<dt>Tasks app</dt><dd><p>Select your preferred tasks app. Tasks are only synchronized with the selected app.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="account-settings">
+<h2>Account settings<a class="headerlink" href="#account-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="synchronization">
+<h3>Synchronization<a class="headerlink" href="#synchronization" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>Sync intervals</dt><dd><p>Here you can choose the preferred sync interval for address books, calendars and task lists. If you select “only manually”, synchronization is only run on explicit user request. In the other cases, the sync interval is saved in Android settings. Android will run synchronization when local data has been changed (normally very quickly, but in some cases, it may take a few seconds or even minutes) and in regular intervals (given that system-wide automatic synchronization is enabled, permissions are granted, battery saving is disabled for DAVx⁵ and there is a network connection).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Synchronization is not initiated by DAVx⁵ itself. DAVx⁵ relies on the Android content provider framework, which manages synchronization and calls sync adapters like DAVx⁵ according to its settings (like sync interval). If <a class="reference external" href="https://www.davx5.com/faq/synchronization-is-not-run-as-expected">Android does not call DAVx⁵ for some reason</a>, there is no way that DAVx⁵ can synchronize automatically.</p>
+</div>
+<p>Keep in mind that low sync intervals need more battery (although only changed records are transmitted). Sync intervals less than 15 minutes are not allowed by Android 7 and later, because it would use too much battery. If you need up-to-date information in your calendar app, use a moderate sync interval (like one hour) and the “Synchronize now” function of your calendar app when you need it.</p>
+</dd>
+<dt>Sync over WiFi only</dt><dd><p>If this option is enabled, DAVx⁵ skips synchronization unless the device is connected to a WiFi network. Android Settings / Accounts will still show a successful sync even when the synchronization has been skipped. Manually forced synchronization will ignore this setting! It is not intended as a security function, but to avoid network connection error notifications.</p>
+<p>When <a class="reference external" href="https://source.android.com/devices/tech/connect/data-saver">Android Data Saver mode</a> is active, <em>sync over WiFi only</em> is automatically enabled.</p>
+<p>Use <strong>WiFi SSID restriction</strong> to restrict synchronization to one or more specific WiFi networks (requires location permission, including background location). List all allowed SSIDs as a comma-separated list, for instance SSID1,ssid2. Hidden networks and SSIDs with commas are not supported.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>User name / password / client certificate</dt><dd><p>You can change the credentials used for synchronization at any time here (for instance, when your password has been changed on the server).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="caldav">
+<h3>CalDAV<a class="headerlink" href="#caldav" title="Permalink to this headline">¶</a></h3>
+<dl>
+<dt>Past event time limit</dt><dd><p>Number of days which events will be synchronized in the past. For instance, <em>90</em> (default setting) will synchronize events which are 90 days in the past and all newer events. Older events won’t be synchronized and won’t show up in the calendar anymore. <strong>An empty value means that all events will be synchronized.</strong></p>
+</dd>
+<dt>Default reminder</dt><dd><p>Number of minutes a default reminder will be created before the start of every event that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>is a date/time event (= not a full-day event)</p></li>
+<li><p>doesn’t have a reminder.</p></li>
+</ul>
+</div></blockquote>
+<p>An empty value means that no default reminders will be created. Default reminders are only set locally, but if an event is edited and uploaded, they will be uploaded like normal reminders.</p>
+</dd>
+<dt>Manage calendar colors</dt><dd><p>When turned on, DAVx⁵ will set the local calendar colors to the colors transmitted by the server (or default green, if not sent by the server). To fetch updated colors from the server, see <a class="reference internal" href="accounts_collections.html#refresh-collections"><span class="std std-ref">Refreshing the collection list</span></a>.</p>
+</dd>
+<dt>Event color support</dt><dd><p>Whether colors of single events are synchronized to the Android device. If you enable this option, only new events are affected, so you mave have to unselect the calendar, sync, select it again and sync again. This option is disabled by default because there are some big calendar apps which crash when processing colorized events.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="carddav">
+<h3>CardDAV<a class="headerlink" href="#carddav" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>Contact group method</dt><dd><p>Controls which contact group method is used for this account. For more information, see <a class="reference internal" href="technical_information.html#contact-groups"><span class="std std-ref">Contact groups</span></a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="webdav_mounts.html" class="btn btn-neutral float-left" title="WebDAV Mounts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="technical_information.html" class="btn btn-neutral float-right" title="Technical information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright contributors. This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+      <span class="lastupdated">Last updated on Nov 07, 2021.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
